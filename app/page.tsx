@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react'
-import Hello from './Hello'
+import { useEffect, useState } from "react";
+import Hello from "./Hello";
 
 export default function Home() {
-
-  return <div>
-            <Hello />
-            </div>
+  return (
+    <div>
+      <Hello />
+    </div>
+  );
 }
