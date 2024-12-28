@@ -1,10 +1,7 @@
-import { useEffect, useState } from "react";
-import Hello from "./Hello";
+import HomeComponent from "@/app/_components/home";
 
-export default function Home() {
-  return (
-    <div>
-      <Hello />
-    </div>
-  );
+function Home() {
+  return <HomeComponent />;
 }
+
+export default Home;

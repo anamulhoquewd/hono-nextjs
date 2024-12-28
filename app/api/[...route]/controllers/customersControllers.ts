@@ -1,5 +1,5 @@
 import { Context } from "hono";
-import { Customer } from "./../models";
+import { Customer } from "@/app/api/[...route]/models";
 /**
  * @api {get} /customers Get All Customers
  * @apiGroup Customers
@@ -29,7 +29,7 @@ export const getCustomers = async (c: Context) => {
  * @apiGroup Customers
  * @access Private
  */
-export const getSingleCustomer = async (c) => {
+export const getSingleCustomer = async (c: Context) => {
   const id = c.req.param("id");
   // Get single customer
   try {
@@ -50,7 +50,7 @@ export const getSingleCustomer = async (c) => {
  * @apiGroup Customer
  * @access Private
  */
-export const createCustomer = async (c) => {
+export const createCustomer = async (c: Context) => {
   const body = await c.req.json();
   const { phone } = body;
   // Check for existing customer
@@ -96,7 +96,7 @@ export const createCustomer = async (c) => {
  * @apiGroup Customer
  * @access Private
  */
-export const updateCustomer = async (c) => {
+export const updateCustomer = async (c: Context) => {
   const body = c.get("filteredBody");
   const { order, ...otherFields } = body;
   const id = c.req.param("id");
@@ -135,7 +135,7 @@ export const updateCustomer = async (c) => {
  * @apiGroup Customer
  * @access Private
  */
-export const deleteCustomer = async (c) => {
+export const deleteCustomer = async (c: Context) => {
   const id = c.req.param("id");
   try {
     const deletedCustomer = await Customer.findByIdAndDelete(id);

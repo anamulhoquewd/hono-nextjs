@@ -1,7 +1,7 @@
 import { Hono } from "hono";
-import { customer } from "../controllers";
-import { isAdmin, isAdminOrManager, protect } from "../middlewares";
-import { protectFields } from "@/utils";
+import { customer } from "@/app/api/[...route]/controllers";
+import { isAdmin, isAdminOrManager, protect } from "@/app/api/[...route]/middlewares";
+import { protectFields } from "@/utils/protectFields";
 
 const customers = new Hono();
 

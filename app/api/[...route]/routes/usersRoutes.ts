@@ -1,8 +1,8 @@
 import { Hono } from "hono";
 import { user } from "./../controllers";
 import { isAdmin, isAdminOrManager, protect } from "./../middlewares";
-import { protectFields } from "@/utils";
-import rateLimit from "hono-rate-limit";
+import { protectFields } from "@/utils/protectFields";
+// import rateLimit from "hono-rate-limit";
 const users = new Hono();
 
 // Login User

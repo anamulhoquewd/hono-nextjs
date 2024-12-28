@@ -1,5 +1,5 @@
 import type { Context } from "hono";
-import { Customer, Order } from "./../models";
+import { Customer, Order } from "@/app/api/[...route]/models";
 import { format } from "date-fns";
 
 /**

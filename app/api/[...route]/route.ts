@@ -3,8 +3,9 @@ import { logger } from "hono/logger";
 import { cors } from "hono/cors";
 import { prettyJSON } from "hono/pretty-json";
 import { handle } from "hono/vercel";
-import { connectDB } from "./db";
-import { customers, users, orders } from "./routes";
+import { connectDB } from "@/app/api/[...route]/config/db";
+import { customers, users, orders } from "@/app/api/[...route]/routes";
+import { errorHandler, notFound } from "@/app/api/[...route]/middlewares";
 export const dynamic = "force-dynamic";
 
 const app = new Hono().basePath("/api/v1");
@@ -17,7 +18,7 @@ app.use("*", logger(), prettyJSON());
 
 // Cors
 app.use(
-  // "*",
+  "*",
   cors({
     origin: "https://hono-nextjs-tau-ebon.vercel.app",
     credentials: true,
@@ -35,27 +36,18 @@ app.route("/customers", customers);
 // Order Routes
 app.route("/orders", orders);
 
-// Home Route
-app.get("/test", (c) =>
-  c.json({
-    message: "hello testing!",
-  })
-);
-
-app.get("/hello", (c) => {
-  return c.json({
-    message: "Hello from Hono on Vercel!",
-  });
+// Error Handler
+app.onError((err, c) => {
+  const error = errorHandler(c);
+  return error;
 });
 
-// app.get("/:wild", (c) => {
-//   const wild = c.req.param("wild");
-//   return c.json({
-//     message: `Hello from Hono on Vercel! You're now on /api/${wild}!`,
-//   });
-// });
+// Not Found Handler
+app.notFound((c) => {
+  const error = notFound(c);
+  return error;
+});
 
-// export const GET = handle(app);
 // Named exports for HTTP methods
 export const GET = async (req: Request, ctx: any) => handle(app)(req, ctx);
 export const POST = async (req: Request, ctx: any) => handle(app)(req, ctx);

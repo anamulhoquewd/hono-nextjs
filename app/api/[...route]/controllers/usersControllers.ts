@@ -1,10 +1,13 @@
 import type { Context } from "hono";
-import { User } from "./../models";
+import { User } from "@/app/api/[...route]/models";
 import { stringGenerator } from "@/utils";
-import { deleteFromCloudinary, uploadFileToCloudinary } from "@/utils";
+import {
+  deleteFromCloudinary,
+  uploadFileToCloudinary,
+} from "@/app/api/[...route]/config/cloudinary/cloudinaryConfig";
 import nodemailer from "nodemailer";
 import EmailTemplate from "./../emailComponents/userDetails";
-import PasswordResetEmail from "./../emailComponents/reset";
+import PasswordResetEmail from "@/app/api/[...route]/emailComponents/reset";
 import { render } from "@react-email/components";
 import * as React from "react";
 import crypto from "crypto";
@@ -226,7 +229,7 @@ export const loginUser = async (c: Context) => {
 
     // create http only cookie containing the access token
     // TODO: set domain to environment variable
-    const cookie = await setSignedCookie(
+    await setSignedCookie(
       c,
       "auth_token",
       token,
@@ -244,9 +247,6 @@ export const loginUser = async (c: Context) => {
         sameSite: "Strict",
       }
     );
-
-    console.log("Cookie:", cookie);
-    console.log("Token:", token);
 
     return c.json({
       success: true,

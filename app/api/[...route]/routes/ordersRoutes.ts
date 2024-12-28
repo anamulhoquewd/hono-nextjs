@@ -1,7 +1,7 @@
 import { Hono } from "hono";
-import { order } from "./../controllers";
-import { isAdmin, isAdminOrManager, protect } from "../middlewares";
-import { protectFields } from "@/utils";
+import { order } from "@/app/api/[...route]/controllers";
+import { isAdmin, isAdminOrManager, protect } from "@/app/api/[...route]/middlewares";
+import { protectFields } from "@/utils/protectFields";
 const orders = new Hono();
 // Get All orders
 orders.get("/", protect, (c) => order.getOrders(c));

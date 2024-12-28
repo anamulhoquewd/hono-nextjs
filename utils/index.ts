@@ -1,13 +1,4 @@
 import { stringGenerator } from "./stringGenerator";
-import {
-  uploadFileToCloudinary,
-  deleteFromCloudinary,
-} from "./cloudinaryConfig";
-import { protectFields } from "./protectFields";
+import { handleAxiosError } from "./error";
 
-export {
-  stringGenerator,
-  protectFields,
-  uploadFileToCloudinary,
-  deleteFromCloudinary,
-};
+export { stringGenerator, handleAxiosError };

@@ -1,5 +1,5 @@
 import { verify } from "hono/jwt";
-import { User } from "./../models";
+import { User } from "@/app/api/[...route]/models";
 import { getSignedCookie } from "hono/cookie";
 import { Context, Next } from "hono";
 // Protect Route for Authenticated Users (using cookie)
