@@ -233,13 +233,11 @@ export const loginUser = async (c: Context) => {
         path: "/",
         secure: process.env.NODE_ENV === "production",
         domain:
-          process.env.NODE_ENV === "production"
-            ? "https://hono-nextjs-tau-ebon.vercel.app"
-            : undefined,
+          process.env.NODE_ENV === "production" ? ".vercel.app" : undefined,
         httpOnly: true,
-        maxAge: 1000,
+        maxAge: 60 * 60 * 24 * 30,
         expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
-        sameSite: "Strict",
+        sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
       }
     );
 
