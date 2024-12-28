@@ -51,8 +51,6 @@ const useCustomers = () => {
         throw new Error(response.data.message);
       }
 
-      console.log("User Created Successfully");
-
       registerForm.reset();
 
       setIsOpen(false);
@@ -66,8 +64,6 @@ const useCustomers = () => {
         type: "custom",
         message: handledError.message,
       });
-
-      console.error("Error:", handledError.message || "An error occurred.");
     }
   };
 
@@ -91,13 +87,13 @@ const useCustomers = () => {
   //       throw new Error(response.data.message);
   //     }
 
-  //     console.log("User Found Successfully");
+  //
 
   //     setSingleUser(response.data.data);
   //   } catch (err) {
   //     const handledError = handleAxiosError(err);
 
-  //     console.error("Error:", handledError.message || "An error occurred.");
+  //
   //   } finally {
   //     setLoading(false);
   //   }
@@ -120,7 +116,6 @@ const useCustomers = () => {
       setUsers(response.data.data || []);
     } catch (err) {
       const handledError = handleAxiosError(err);
-      console.error("Error:", handledError.message || "An error occurred.");
     } finally {
       setLoading(false);
     }
@@ -144,8 +139,6 @@ const useCustomers = () => {
         throw new Error(response.data.message);
       }
 
-      console.log(response.data.message || "User Updated Successfully");
-
       setIsOpen(false);
       setIsEditing(false);
 
@@ -153,8 +146,6 @@ const useCustomers = () => {
       getUsers();
     } catch (err) {
       const handledError = handleAxiosError(err);
-
-      console.error("Error:", handledError.message || "An error occurred.");
     }
   };
 
@@ -172,14 +163,11 @@ const useCustomers = () => {
         throw new Error(response.data.message);
       }
 
-      console.log("User Deleted Successfully");
       setUserId(null);
       setDefaultValues(null);
       getUsers();
     } catch (err) {
       const handledError = handleAxiosError(err);
-
-      console.error("Error:", handledError.message || "An error occurred.");
     }
   };
 

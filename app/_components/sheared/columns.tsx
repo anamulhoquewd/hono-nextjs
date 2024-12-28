@@ -260,7 +260,6 @@ const ordersColumns = ({
             <DropdownMenuItem
               onClick={() => {
                 setValues!(row.original);
-                console.log(row.original);
                 setId(row.getValue("_id"));
                 setIsAddOpen!(true);
                 setIsEditing!(true);

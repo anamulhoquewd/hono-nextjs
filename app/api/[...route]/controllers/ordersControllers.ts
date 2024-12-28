@@ -32,7 +32,6 @@ export const getOrders = async (c: Context) => {
       message: "Orders found",
     });
   } catch (error: any) {
-    console.error("Error get all orders:", error?.message || error);
     c.status(500);
     return c.json({
       success: false,
@@ -56,7 +55,6 @@ export const getSingleOrder = async (c: Context) => {
 
     return c.json({ data: order, success: true, message: "Order found" });
   } catch (error: any) {
-    console.error("Error get single order:", error?.message || error);
     c.status(500);
     return c.json({
       success: false,
@@ -80,7 +78,6 @@ export const getOrdersByCustomer = async (c: Context) => {
 
     return c.json({ data: orders, success: true, message: "Orders found" });
   } catch (error: any) {
-    console.error("Error get orders by customer:", error?.message || error);
     c.status(500);
     return c.json({
       success: false,
@@ -172,7 +169,6 @@ export const updateOrder = async (c: Context) => {
       message: "Order updated successfully",
     });
   } catch (error: any) {
-    console.error("Error updating order:", error?.message || error);
     c.status(500);
     return c.json({
       success: false,
@@ -204,7 +200,6 @@ export const deleteOrder = async (c: Context) => {
       message: "Order deleted successfully",
     });
   } catch (error: any) {
-    console.error("Error deleting order:", error?.message || error);
     c.status(500);
     return c.json({
       success: false,

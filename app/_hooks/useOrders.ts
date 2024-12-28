@@ -89,8 +89,6 @@ const useOrders = () => {
         throw new Error(customer.data.message);
       }
 
-      console.log("Order Created Successfully");
-
       registerForm.reset();
 
       setIsOpen(false);
@@ -104,8 +102,6 @@ const useOrders = () => {
         type: "custom",
         message: handledError.message,
       });
-
-      console.error("Error:", handledError.message || "An error occurred.");
     }
   };
 
@@ -128,8 +124,6 @@ const useOrders = () => {
       setTotalOrdersCount(response.data.data.length || 0);
     } catch (err) {
       const handledError = handleAxiosError(err);
-
-      console.error("Error:", handledError.message || "An error occurred.");
     } finally {
       setLoading(false);
     }
@@ -152,8 +146,6 @@ const useOrders = () => {
       setOrdersOfCustomer(response.data.data || []);
     } catch (err) {
       const handledError = handleAxiosError(err);
-
-      console.error("Error:", handledError.message || "An error occurred.");
     } finally {
       setLoading(false);
     }
@@ -173,8 +165,6 @@ const useOrders = () => {
         throw new Error(response.data.message);
       }
 
-      console.log(response.data.message || "User Updated Successfully");
-
       setIsOpen(false);
       setOrderId(null);
       setIsEditing(false);
@@ -189,8 +179,6 @@ const useOrders = () => {
       getOrders();
     } catch (err) {
       const handledError = handleAxiosError(err);
-
-      console.error("Error:", handledError.message || "An error occurred.");
     }
   };
 
@@ -208,13 +196,10 @@ const useOrders = () => {
         throw new Error(response.data.message);
       }
 
-      console.log("Order Deleted Successfully");
       setOrderId(null);
       getOrders();
     } catch (err) {
       const handledError = handleAxiosError(err);
-
-      console.error("Error:", handledError.message || "An error occurred.");
     }
   };
 

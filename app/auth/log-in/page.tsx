@@ -41,16 +41,12 @@ export default function LoginPage() {
   // login handler
   const loginHandler = async (values: { email: string; password: string }) => {
     try {
-      const response = await axios.post(
-        `${baseUrl}/users/login`,
-        values,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        }
-      );
+      const response = await axios.post(`${baseUrl}/users/login`, values, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
 
       if (!response.data.success) {
         throw new Error(response.data.message);
@@ -66,8 +62,6 @@ export default function LoginPage() {
         type: "custom",
         message: handledError.message,
       });
-
-      console.error("Error:", handledError.message || "An error occurred.");
     }
   };
 

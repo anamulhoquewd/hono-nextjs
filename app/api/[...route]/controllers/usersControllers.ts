@@ -30,7 +30,6 @@ export const getUsers = async (c: Context) => {
       message: "Users fetched successfully",
     });
   } catch (error: any) {
-    console.error("Error getting users:", error?.message || error);
     c.status(500);
     return c.json({
       success: false,
@@ -58,7 +57,6 @@ export const getSingleUser = async (c: Context) => {
       message: "User fetched successfully",
     });
   } catch (error: any) {
-    console.error("Error getting single user:", error?.message || error);
     c.status(500);
     return c.json({
       success: false,
@@ -88,7 +86,6 @@ export const getProfile = async (c: Context) => {
       message: "User profile fetched successfully",
     });
   } catch (error: any) {
-    console.error("Error getting profile:", error?.message || error);
     c.status(500);
     return c.json({
       success: false,
@@ -159,7 +156,6 @@ export const createUser = async (c: Context) => {
     };
 
     const info = await transporter.sendMail(mailOptions);
-    console.log("Email sent: ", info);
 
     c.status(201);
     return c.json({
@@ -176,7 +172,6 @@ export const createUser = async (c: Context) => {
       message: "User created successfully",
     });
   } catch (error: any) {
-    console.error("Error creating user:", error?.message || error);
     c.status(500);
     return c.json({
       success: false,
@@ -253,7 +248,6 @@ export const loginUser = async (c: Context) => {
       message: "User logged in successfully",
     });
   } catch (error: any) {
-    console.error("Error logging in:", error || error);
     c.status(500);
     return c.json({
       success: false,
@@ -280,7 +274,6 @@ export const logoutUser = async (c: Context) => {
       message: "User logged out successfully",
     });
   } catch (error: any) {
-    console.error("Error logging out:", error?.message || error);
     c.status(500);
     return c.json({
       success: false,
@@ -323,7 +316,6 @@ export const updateUser = async (c: Context) => {
       message: "User updated successfully",
     });
   } catch (error: any) {
-    console.error("Error updated user:", error?.message || error);
     c.status(500);
     return c.json({
       success: false,
@@ -356,7 +348,6 @@ export const deleteUser = async (c: Context) => {
       message: "User deleted successfully",
     });
   } catch (error: any) {
-    console.error("Error deleting user:", error?.message || error);
     c.status(500);
     return c.json({
       success: false,
@@ -401,7 +392,6 @@ export const changePassword = async (c: Context) => {
       message: "Password changed successfully",
     });
   } catch (error: any) {
-    console.error("Error changing password:", error?.message || error);
     c.status(500);
     return c.json({
       success: false,
@@ -444,7 +434,6 @@ export const uploadAvatar = async (c: Context) => {
       url: uploadedFile.secure_url,
     });
   } catch (error: any) {
-    console.error("Error uploading file:", error?.message || error);
     c.status(500);
     return c.json({
       success: false,
@@ -506,15 +495,12 @@ export const forgotPassword = async (c: Context) => {
 
     const info = await transporter.sendMail(mailOptions);
 
-    console.log(info.response);
-
     c.status(200);
     return c.json({
       success: true,
       message: "Password reset email sent",
     });
   } catch (error: any) {
-    console.error("Error in forgotPassword:", error.message);
     c.status(500);
     return c.json({
       success: false,
@@ -561,7 +547,6 @@ export const resetPassword = async (c: Context) => {
       message: "Password reset successfully",
     });
   } catch (error: any) {
-    console.error("Error in resetPassword:", error.message);
     c.status(500);
     return c.json({
       success: false,

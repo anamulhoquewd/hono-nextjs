@@ -76,12 +76,8 @@ const useUsers = (role?: "admin" | "manager" | "delivery_man") => {
       }
 
       router.push("/");
-
-      console.log(response.data.message || "User logged out successfully!");
     } catch (err) {
       const handledError = handleAxiosError(err);
-
-      console.error("Error:", handledError.message || "An error occurred.");
     }
   };
 
@@ -98,8 +94,6 @@ const useUsers = (role?: "admin" | "manager" | "delivery_man") => {
         throw new Error(response.data.message);
       }
 
-      console.log("User Created Successfully");
-
       registerForm.reset();
 
       setIsOpen(false);
@@ -113,8 +107,6 @@ const useUsers = (role?: "admin" | "manager" | "delivery_man") => {
         type: "custom",
         message: handledError.message,
       });
-
-      console.error("Error:", handledError.message || "An error occurred.");
     }
   };
 
@@ -136,8 +128,6 @@ const useUsers = (role?: "admin" | "manager" | "delivery_man") => {
       setProfile(response.data.data);
     } catch (err) {
       const handledError = handleAxiosError(err);
-
-      console.error("Error:", handledError.message || "An error occurred.");
     } finally {
       setLoading(false);
     }
@@ -161,7 +151,6 @@ const useUsers = (role?: "admin" | "manager" | "delivery_man") => {
       setUsers(response.data.data || []);
     } catch (err) {
       const handledError = handleAxiosError(err);
-      console.error("Error:", handledError.message || "An error occurred.");
     } finally {
       setLoading(false);
     }
@@ -181,8 +170,6 @@ const useUsers = (role?: "admin" | "manager" | "delivery_man") => {
         throw new Error(response.data.message);
       }
 
-      console.log(response.data.message || "User Updated Successfully");
-
       setProfile(response.data.data);
       setIsOpen(false);
       setIsEditing(false);
@@ -193,8 +180,6 @@ const useUsers = (role?: "admin" | "manager" | "delivery_man") => {
         type: "custom",
         message: "Email or Number already exists",
       });
-
-      console.error("Error:", handledError.message || "An error occurred.");
     }
   };
 
@@ -202,7 +187,7 @@ const useUsers = (role?: "admin" | "manager" | "delivery_man") => {
   const uploadAvatar = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (!files || !files[0]) {
-      return console.log("Please Provide a File");
+      return;
     }
 
     const formData = new FormData();
@@ -224,14 +209,11 @@ const useUsers = (role?: "admin" | "manager" | "delivery_man") => {
         throw new Error(response.data.message);
       }
 
-      console.log(response.data.message || "Avatar Uploaded Successfully");
       setIsAvatarOpen(false);
 
       updateUserHandler({ avatar: response.data.url });
     } catch (err) {
       const handledError = handleAxiosError(err);
-
-      console.error("Error:", handledError.message || "An error occurred.");
     }
   };
 
@@ -253,8 +235,6 @@ const useUsers = (role?: "admin" | "manager" | "delivery_man") => {
         throw new Error(response.data.message);
       }
 
-      console.log(response.data.message || "Password Changed Successfully");
-
       changePassForm.reset();
       setIsChangePassOpen(false);
     } catch (err) {
@@ -264,8 +244,6 @@ const useUsers = (role?: "admin" | "manager" | "delivery_man") => {
         type: "custom",
         message: handledError.message,
       });
-
-      console.error("Error:", handledError.message || "An error occurred.");
     }
   };
 
@@ -283,13 +261,10 @@ const useUsers = (role?: "admin" | "manager" | "delivery_man") => {
         throw new Error(response.data.message);
       }
 
-      console.log("User Deleted Successfully");
       setUserId(null);
       getUsers();
     } catch (err) {
       const handledError = handleAxiosError(err);
-
-      console.error("Error:", handledError.message || "An error occurred.");
     }
   };
 

@@ -31,8 +31,7 @@ export async function middleware(req: NextRequest) {
       const { payload }: any = decode(token);
       if (payload.exp * 1000 < Date.now()) {
         // Delete expired token cookie
-        console.log("Token Expired. Current Time:", Date.now());
-        console.log("Token Expiry Time:", payload.exp * 1000);
+
         const response = NextResponse.redirect(
           new URL("/auth/log-in", req.url)
         );
@@ -81,7 +80,6 @@ export async function middleware(req: NextRequest) {
 
     return NextResponse.next();
   } catch (err) {
-    console.error("Middleware Error:", err);
     return NextResponse.redirect(new URL("/auth/log-in", req.url));
   }
 }

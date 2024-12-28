@@ -2,8 +2,6 @@ import type { Context } from "hono";
 
 // Error Handler
 export const errorHandler = (c: Context) => {
-  console.error("Error:", c.error?.message || "Unknown Error");
-
   return c.json({
     success: false,
     message: c.error?.message,

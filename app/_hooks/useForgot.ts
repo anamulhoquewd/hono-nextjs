@@ -2,7 +2,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { forgotPasswordSchema, resetPasswordSchema } from "@/app/_components/formSchema";
+import {
+  forgotPasswordSchema,
+  resetPasswordSchema,
+} from "@/app/_components/formSchema";
 import { z } from "zod";
 import { useParams, useRouter } from "next/navigation";
 import { handleAxiosError } from "@/utils";
@@ -46,8 +49,6 @@ const useForgot = () => {
       return response.data;
     } catch (err) {
       const handledError = handleAxiosError(err);
-
-      console.error("Error:", handledError.message || "An error occurred.");
     } finally {
       setIsPending(false);
     }
@@ -77,8 +78,6 @@ const useForgot = () => {
         type: "custom",
         message: "Invalid token",
       });
-
-      console.error("Error:", handledError.message || "An error occurred.");
     } finally {
       setIsPending(false);
     }

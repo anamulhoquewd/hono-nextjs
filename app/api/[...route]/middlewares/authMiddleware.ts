@@ -25,7 +25,6 @@ export const protect = async (c: Context, next: Next) => {
     c.set("user", user);
     await next();
   } catch (err) {
-    console.log(err);
     c.status(401);
     return c.json({ message: "Invalid token! You are not authorized!" });
   }
