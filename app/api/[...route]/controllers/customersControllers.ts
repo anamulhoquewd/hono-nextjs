@@ -14,7 +14,7 @@ export const getCustomers = async (c: Context) => {
       success: true,
       message: "Customers found",
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error get all customers:", error?.message || error);
     c.status(500);
     return c.json({
@@ -35,7 +35,7 @@ export const getSingleCustomer = async (c: Context) => {
   try {
     const customer = await Customer.findById(id);
     return c.json({ data: customer, success: true, message: "Customer found" });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error get single customer:", error?.message || error);
     c.status(500);
     return c.json({
@@ -81,7 +81,7 @@ export const createCustomer = async (c: Context) => {
       },
       message: "Customer created successfully",
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error creating customer:", error?.message || error);
     c.status(500);
     return c.json({
@@ -120,7 +120,7 @@ export const updateCustomer = async (c: Context) => {
       data: updatedUser,
       message: "User updated successfully",
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error updating user:", error?.message || error);
     c.status(500);
     return c.json({
@@ -148,7 +148,7 @@ export const deleteCustomer = async (c: Context) => {
       data: deletedCustomer,
       message: "Customer deleted successfully",
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error deleting user:", error?.message || error);
     c.status(500);
     return c.json({

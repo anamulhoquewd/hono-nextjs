@@ -49,8 +49,8 @@ app.notFound((c) => {
 });
 
 // Named exports for HTTP methods
-export const GET = async (req: Request, ctx: any) => handle(app)(req, ctx);
-export const POST = async (req: Request, ctx: any) => handle(app)(req, ctx);
-export const PUT = async (req: Request, ctx: any) => handle(app)(req, ctx);
-export const DELETE = async (req: Request, ctx: any) => handle(app)(req, ctx);
-export const PATCH = async (req: Request, ctx: any) => handle(app)(req, ctx);
+export const GET = async (req: Request) => handle(app)(req);
+export const POST = async (req: Request) => handle(app)(req);
+export const PUT = async (req: Request) => handle(app)(req);
+export const DELETE = async (req: Request) => handle(app)(req);
+export const PATCH = async (req: Request) => handle(app)(req);
