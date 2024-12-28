@@ -15,7 +15,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { handleAxiosError } from "@/utils";
 
-const baseUrl = "http://localhost:3000/api/v1";
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 export default function LoginPage() {
   const router = useRouter();
