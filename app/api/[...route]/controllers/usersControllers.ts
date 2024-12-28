@@ -13,6 +13,7 @@ import * as React from "react";
 import crypto from "crypto";
 import { setSignedCookie, deleteCookie } from "hono/cookie";
 import { sign } from "hono/jwt";
+import { cookies } from "next/headers";
 
 /**
  * @api {get} /users Get All Users
@@ -265,9 +266,14 @@ export const loginUser = async (c: Context) => {
  */
 export const logoutUser = async (c: Context) => {
   try {
-    // Clear cookie
+    // Clear cookie using Hono's deleteCookie
     deleteCookie(c, "auth_token", {
       path: "/",
+      secure: process.env.NODE_ENV === "production",
+      domain:
+        process.env.NODE_ENV === "production"
+          ? "hono-nextjs-tau-ebon.vercel.app"
+          : undefined,
     });
 
     return c.json({
@@ -466,9 +472,7 @@ export const forgotPassword = async (c: Context) => {
     await user.save();
 
     // Create reset URL
-    const protocol = c.req.header("x-forwarded-proto") || "http";
-    const host = process.env.HOST || "localhost:3000";
-    const resetUrl = `${protocol}://${host}/auth/reset-password/${resetToken}`;
+    const resetUrl = `https://hono-nextjs-tau-ebon.vercel.app/auth/reset-password/${resetToken}`;
 
     // Create the email content
     const emailHtml = await render(

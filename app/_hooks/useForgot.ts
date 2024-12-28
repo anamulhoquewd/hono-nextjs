@@ -48,7 +48,7 @@ const useForgot = () => {
 
       return response.data;
     } catch (err) {
-      const handledError = handleAxiosError(err);
+      handleAxiosError(err);
     } finally {
       setIsPending(false);
     }
@@ -58,7 +58,7 @@ const useForgot = () => {
     setIsPending(true);
     try {
       const response = await axios.post(
-        `${baseUrl}/users/reset-password/${token}`,
+        `${baseUrl}/reset-password/${token}`,
         data
       );
 
@@ -68,11 +68,11 @@ const useForgot = () => {
 
       resetForm.reset();
 
-      router.push("/auth/users/log-in");
+      router.push("/auth/log-in");
 
       return response.data;
     } catch (err) {
-      const handledError = handleAxiosError(err);
+      handleAxiosError(err);
 
       resetForm.setError("password", {
         type: "custom",

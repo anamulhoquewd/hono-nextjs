@@ -18,8 +18,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { UserAvatar } from "./avatar";
 import useUsers from "@/app/_hooks/useUsers";
-import AddUsersDialog from "../auth/addUsersDialog";
-import ChangePassForms from "../auth/changePass";
+import AddUsersDialog from "@/app/_components/auth/addUsersDialog";
+import ChangePassForms from "@/app/_components/auth/changePass";
 
 export function UserProfile() {
   const {

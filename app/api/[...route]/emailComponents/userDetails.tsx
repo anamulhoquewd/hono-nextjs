@@ -16,6 +16,7 @@ interface EmailTemplateProps {
   email: string;
   password: string;
 }
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const EmailTemplate = ({
   name,
@@ -38,7 +39,7 @@ export const EmailTemplate = ({
                 </Text>
               </div>
               <div className="bg-white p-6 rounded-b-lg shadow-lg">
-                <Text className="text-black text-lg mb-4">Hello {name},</Text>
+                <Text className="text-black font-semibold text-xl mb-4">Hello {name},</Text>
                 <Text className="text-black text-base mb-4">
                   Your account has been created successfully. Here are your
                   login details:
@@ -64,7 +65,7 @@ export const EmailTemplate = ({
                 <Button
                   target="_blank"
                   className="bg-blue-600 rounded py-3 px-5 text-white text-center font-semibold no-underline text-base"
-                  href="http://localhost:3000/auth/users/log-in"
+                  href={`${baseUrl}/auth/log-in`}
                 >
                   Log In Now
                 </Button>

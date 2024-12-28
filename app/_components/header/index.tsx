@@ -213,7 +213,7 @@ const HeaderComponent = () => {
                       {profile?.name || "Please Log out before logging in"}
                     </p>
                     <p className="text-xs leading-none text-muted-foreground">
-                      {profile?.email || "anamd@example.com"}
+                      {profile?.email || "anam@example.com"}
                     </p>
                   </div>
                 </DropdownMenuLabel>

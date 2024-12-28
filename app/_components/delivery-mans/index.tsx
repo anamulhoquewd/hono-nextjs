@@ -67,7 +67,7 @@ function DeliveryManTable() {
     },
     initialState: {
       pagination: {
-        pageSize: 5, // Set the initial page size
+        pageSize: 10, // Set the initial page size
       },
     },
   });

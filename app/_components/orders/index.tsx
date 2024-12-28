@@ -99,7 +99,7 @@ function OrderTable() {
     },
     initialState: {
       pagination: {
-        pageSize: 20, // Set the initial page size
+        pageSize: 10, // Set the initial page size
       },
     },
   });

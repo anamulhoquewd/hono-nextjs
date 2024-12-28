@@ -30,7 +30,7 @@ const RegisterUsers = () => {
           <p className="text-sm text-gray-600">
             Already have an account?{" "}
             <Link
-              href="/auth/users/log-in"
+              href="/auth/log-in"
               className="font-medium text-primary hover:underline"
             >
               Log in
