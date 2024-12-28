@@ -232,12 +232,15 @@ export const loginUser = async (c: Context) => {
       {
         path: "/",
         secure: process.env.NODE_ENV === "production",
+        // Remove or set to your specific subdomain
         domain:
-          process.env.NODE_ENV === "production" ? ".vercel.app" : undefined,
+          process.env.NODE_ENV === "production"
+            ? "hono-nextjs-tau-ebon.vercel.app"
+            : undefined,
         httpOnly: true,
         maxAge: 60 * 60 * 24 * 30,
         expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
-        sameSite: process.env.NODE_ENV === "production" ? "Lax" : "Strict",
+        sameSite: process.env.NODE_ENV === "production" ? "None" : "Strict",
       }
     );
 
