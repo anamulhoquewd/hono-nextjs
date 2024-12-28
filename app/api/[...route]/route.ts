@@ -18,12 +18,12 @@ app.use("*", logger(), prettyJSON());
 
 // Cors
 app.use(
-  "*",
   cors({
-    origin: "https://hono-nextjs-tau-ebon.vercel.app",
+    origin:
+      process.env.NODE_ENV === "production"
+        ? "https://hono-nextjs-tau-ebon.vercel.app"
+        : "http://localhost:3000",
     credentials: true,
-    allowMethods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-    allowHeaders: ["Content-Type"],
   })
 );
 

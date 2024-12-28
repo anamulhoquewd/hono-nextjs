@@ -237,7 +237,7 @@ export const loginUser = async (c: Context) => {
         httpOnly: true,
         maxAge: 60 * 60 * 24 * 30,
         expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
-        sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+        sameSite: process.env.NODE_ENV === "production" ? "Lax" : "Strict",
       }
     );
 
