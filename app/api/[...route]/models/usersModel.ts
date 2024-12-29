@@ -84,7 +84,7 @@ userSchema.pre("save", async function (next) {
 // Add a validation to check if the number of admins exceeds the limit before saving a new user
 userSchema.pre("save", async function (next) {
   if (this.isNew && this.role === "admin") {
-    const maxAdmins = 1; // Set the maximum number of admins allowed
+    const maxAdmins = 2; // Set the maximum number of admins allowed
 
     const existingAdminsCount = await User.countDocuments({ role: "admin" });
     if (existingAdminsCount >= maxAdmins) {
