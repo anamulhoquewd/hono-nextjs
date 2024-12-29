@@ -58,7 +58,7 @@ const useForgot = () => {
     setIsPending(true);
     try {
       const response = await axios.post(
-        `${baseUrl}/reset-password/${token}`,
+        `${baseUrl}/users/reset-password/${token}`,
         data
       );
 

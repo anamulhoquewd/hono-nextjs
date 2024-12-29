@@ -523,13 +523,15 @@ export const resetPassword = async (c: Context) => {
   const token = c.req.param("token");
   const { password } = await c.req.json();
 
+  console.log("token", token, "password", password);
+
   try {
     // Hash the token and search for user with valid token and expiration
     const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
 
     const user = await User.findOne({
       resetPasswordToken: hashedToken,
-      resetPasswordExpire: { $gt: Date.now() }, // Token must not be expired
+      resetPasswordExpire: { $gt: Date.now() }, // Must be greater than the current time
     });
 
     if (!user) {
