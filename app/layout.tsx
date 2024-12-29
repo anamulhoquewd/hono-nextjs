@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./../styles/globals.css";
 import { League_Spartan } from "next/font/google";
+import Head from "next/head";
 
 const spartan = League_Spartan({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -20,6 +21,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Head>
+        <link rel="icon" href="./public/favicon.ico" />
+        <title>JolChowki</title>
+      </Head>
       <body className={`${spartan.variable} ${spartan.className} antialiased`}>
         {children}
       </body>

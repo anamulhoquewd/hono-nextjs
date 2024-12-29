@@ -13,7 +13,8 @@ import * as React from "react";
 import crypto from "crypto";
 import { setSignedCookie, deleteCookie } from "hono/cookie";
 import { sign } from "hono/jwt";
-import { cookies } from "next/headers";
+
+const origin = process.env.NODE_ENV === "production" && process.env.BASE_ORIGIN;
 
 /**
  * @api {get} /users Get All Users
@@ -234,10 +235,7 @@ export const loginUser = async (c: Context) => {
         path: "/",
         secure: process.env.NODE_ENV === "production",
         // Remove or set to your specific subdomain
-        domain:
-          process.env.NODE_ENV === "production"
-            ? "hono-nextjs-tau-ebon.vercel.app"
-            : undefined,
+        domain: origin || undefined,
         httpOnly: true,
         maxAge: 60 * 60 * 24 * 30,
         expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
