@@ -14,7 +14,6 @@ import crypto from "crypto";
 import { setSignedCookie, deleteCookie } from "hono/cookie";
 import { sign } from "hono/jwt";
 
-const origin = process.env.NODE_ENV === "production" && process.env.BASE_ORIGIN;
 
 /**
  * @api {get} /users Get All Users
@@ -235,7 +234,10 @@ export const loginUser = async (c: Context) => {
         path: "/",
         secure: process.env.NODE_ENV === "production",
         // Remove or set to your specific subdomain
-        domain: origin || undefined,
+        domain:
+          process.env.NODE_ENV === "production"
+            ? "jolchowki.vercel.app"
+            : undefined,
         httpOnly: true,
         maxAge: 60 * 60 * 24 * 30,
         expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
