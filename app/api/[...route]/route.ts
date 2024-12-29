@@ -10,6 +10,8 @@ export const dynamic = "force-dynamic";
 
 const app = new Hono().basePath("/api/v1");
 
+const origin = process.env.NODE_ENV === "production" && process.env.BASE_ORIGIN;
+
 // Config MongoDB
 connectDB();
 
@@ -19,10 +21,7 @@ app.use("*", logger(), prettyJSON());
 // Cors
 app.use(
   cors({
-    origin:
-      process.env.NODE_ENV === "production"
-        ? "https://hono-nextjs-tau-ebon.vercel.app"
-        : "http://localhost:3000",
+    origin: origin || "http://localhost:3000",
     credentials: true,
   })
 );
