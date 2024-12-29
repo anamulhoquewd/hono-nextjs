@@ -14,7 +14,6 @@ import crypto from "crypto";
 import { setSignedCookie, deleteCookie } from "hono/cookie";
 import { sign } from "hono/jwt";
 
-
 /**
  * @api {get} /users Get All Users
  * @apiGroup Users
@@ -472,7 +471,7 @@ export const forgotPassword = async (c: Context) => {
     await user.save();
 
     // Create reset URL
-    const resetUrl = `https://hono-nextjs-tau-ebon.vercel.app/auth/reset-password/${resetToken}`;
+    const resetUrl = `${process.env.BASE_ORIGIN}/auth/reset-password/${resetToken}`;
 
     // Create the email content
     const emailHtml = await render(

@@ -16,7 +16,7 @@ interface EmailTemplateProps {
   email: string;
   password: string;
 }
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+const baseUrl = process.env.BASE_ORIGIN; // https://jolchowki.vercel.app
 
 export const EmailTemplate = ({
   name,
