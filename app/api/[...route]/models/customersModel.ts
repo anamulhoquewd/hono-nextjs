@@ -6,6 +6,8 @@ interface ICustomer extends Document {
   secondaryPhone?: string;
   role: "customer";
   address: string;
+  defaultPrice: number;
+  defaultQuantity: number;
   orders: Schema.Types.ObjectId[];
 }
 
@@ -16,6 +18,8 @@ const customerSchema = new Schema<ICustomer>(
     secondaryPhone: { type: String, required: false },
     role: { type: String, required: true, default: "customer" },
     address: { type: String, required: true },
+    defaultPrice: { type: Number, required: true },
+    defaultQuantity: { type: Number, required: true },
     orders: [{ type: Schema.Types.ObjectId, ref: "Order" }],
   },
   {

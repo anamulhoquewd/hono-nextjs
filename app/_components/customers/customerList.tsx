@@ -13,14 +13,15 @@ import {
 import UsersTable from "@/app/_components/sheared/table";
 import { customersColumns } from "@/app/_components/sheared/columns";
 import useCustomers from "@/app/_hooks/useCustomer";
-import AddUsersDialog from "@/app/_components/auth/addUsersDialog";
 import DeleteAccount from "@/app/_components/sheared/deleteUsers";
+import AddCustomersDialog from "./addCustomerDialog";
 
 function CustomerTable() {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
     secondaryPhone: false,
+    _id: false,
   });
 
   const {
@@ -90,7 +91,7 @@ function CustomerTable() {
       />
 
       {/* Form for new add or edit manager. */}
-      <AddUsersDialog
+      <AddCustomersDialog
         onSubmit={isEditing ? updateUserHandler : registerHandler}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
@@ -98,11 +99,8 @@ function CustomerTable() {
         title="Customer"
         values={defaultValues}
         setValues={setDefaultValues}
-        nidDisabled={isEditing}
-        emailDisabled={isEditing}
         isEditing={isEditing}
         setIsEditing={setIsEditing}
-        isCustomer={true}
       />
 
       {/* delete dialog here. */}

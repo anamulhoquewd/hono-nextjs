@@ -6,7 +6,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { UserRegisterForms } from "@/app/_components/forms/registerForm";
+import { UserRegisterForms } from "@/app/_components/forms";
 
 interface Props {
   onSubmit: (values: any) => void;
@@ -16,8 +16,8 @@ interface Props {
   form: any;
   values?: any;
   setValues: (value: any) => void;
-  emailDisabled?: boolean;
-  nidDisabled?: boolean;
+  isEmailDisabled?: boolean;
+  isNidDisabled?: boolean;
   isEditing?: boolean;
   setIsEditing: (value: boolean) => void;
   isCustomer?: boolean;
@@ -31,11 +31,10 @@ function AddUsersDialog({
   form,
   values,
   setValues,
-  emailDisabled = false,
-  nidDisabled = false,
+  isEmailDisabled = false,
+  isNidDisabled = false,
   isEditing,
   setIsEditing,
-  isCustomer,
 }: Props) {
   return (
     <Dialog
@@ -73,10 +72,9 @@ function AddUsersDialog({
             defaultValues={values}
             onSubmit={onSubmit}
             form={form}
-            emailDisabled={emailDisabled}
-            nidDisabled={nidDisabled}
+            isEmailDisabled={isEmailDisabled}
+            isNidDisabled={isNidDisabled}
             isEditing={isEditing}
-            isCustomer={isCustomer}
           />
         </ScrollArea>
       </DialogContent>

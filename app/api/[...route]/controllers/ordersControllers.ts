@@ -17,6 +17,7 @@ export const getOrders = async (c: Context) => {
       _id: order._id,
       quantity: order.quantity,
       price: order.price,
+      total: order.total,
       date: format(order.date, "yyyy-MM-dd"),
       customer: order.customer._id,
       name: order.customer.name,
@@ -95,7 +96,7 @@ export const getOrdersByCustomer = async (c: Context) => {
 export const createOrder = async (c: Context) => {
   const body = await c.req.json();
 
-  const { customer, date } = body; // customer means customer's _id.
+  const { customer, date, quantity } = body; // customer means customer's _id.
 
   const customerData = await Customer.findById(customer);
 
@@ -117,7 +118,10 @@ export const createOrder = async (c: Context) => {
   }
 
   const order = await Order.create({
-    ...body,
+    customer,
+    date,
+    price: customerData.defaultPrice,
+    quantity: quantity || customerData.defaultQuantity,
   });
 
   if (!order) {
@@ -154,9 +158,21 @@ export const updateOrder = async (c: Context) => {
   const id = c.req.param("id");
 
   try {
-    const updatedOrder = await Order.findByIdAndUpdate(id, body, {
-      new: true,
-    });
+    const customerData = await Customer.findById(body.customer);
+
+    // Check if customer exists
+    if (!customerData) {
+      c.status(400);
+      throw new Error("Customer does not found");
+    }
+
+    const updatedOrder = await Order.findByIdAndUpdate(
+      id,
+      { quantity: body.quantity, price: customerData.defaultPrice },
+      {
+        new: true,
+      }
+    );
 
     if (!updatedOrder) {
       c.status(400);

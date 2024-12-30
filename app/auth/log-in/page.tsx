@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { UserLoginForms } from "@/app/_components/forms/loginForm";
+import { UserLoginForms } from "@/app/_components/forms";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useForm } from "react-hook-form";

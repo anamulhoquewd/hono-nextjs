@@ -1,6 +1,10 @@
 # Created by https://www.toptal.com/developers/gitignore/api/node,nextjs
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,nextjs
 
+### Developer ###
+# TODO
+todo.txt
+
 ### NextJS ###
 # dependencies
 /node_modules

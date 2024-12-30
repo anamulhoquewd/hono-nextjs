@@ -21,7 +21,6 @@ function ManagerTable() {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
     _id: false,
-    secondaryPhone: false,
     address: false,
   });
 
@@ -91,8 +90,8 @@ function ManagerTable() {
         title="Manager"
         values={defaultValues}
         setValues={setDefaultValues}
-        nidDisabled={isEditing}
-        emailDisabled={isEditing}
+        isNidDisabled={isEditing}
+        isEmailDisabled={isEditing}
         isEditing={isEditing}
         setIsEditing={setIsEditing}
       />

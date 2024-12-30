@@ -12,10 +12,11 @@ export type UsersType = {
 export type CustomersType = {
   _id: string;
   name: string;
-  email?: string;
   phone: string;
   secondaryPhone?: string;
   role: "customer";
+  defaultPrice: number;
+  defaultQuantity: number;
   address: string;
 };
 
@@ -26,9 +27,8 @@ export type OrdersType = {
   phone: string;
   secondaryPhone?: string;
   address: string;
-  addedBy: string;
-  addedByRole: "manager" | "admin";
   quantity: number;
   price: number;
+  total: number;
   date: Date;
 };

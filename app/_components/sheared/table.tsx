@@ -25,15 +25,16 @@ import {
 } from "@/components/ui/table";
 import { flexRender } from "@tanstack/react-table";
 import { CustomersType, OrdersType, UsersType } from "@/types";
+import { format } from "date-fns";
 
 interface Props {
   table: any;
-  cb: () => void;
+  cb?: () => void;
   columns: any;
   users: UsersType[] | CustomersType[] | OrdersType[];
   title: string;
   description: string;
-  actionText: string;
+  actionText?: string;
   isAddable?: boolean;
   children?: React.ReactNode;
 }
@@ -131,7 +132,7 @@ function UsersTable({
                     }) => {
                       return (
                         <TableHead
-                          className="font-semibold text-muted-foreground"
+                          className="font-semibold text-muted-foreground text-center px-4 py-2"
                           key={header.id}
                         >
                           {header.isPlaceholder
@@ -167,18 +168,23 @@ function UsersTable({
                   }) => {
                     return (
                       <TableRow
+                        className="cursor-pointer text-center"
                         key={row.id}
                         data-state={row.getIsSelected() && "selected"}
                       >
                         {row.getVisibleCells().map((cell) => {
                           const cellValue =
-                            cell.column.id === "price" &&
+                            (cell.column.id === "price" ||
+                              cell.column.id === "total") &&
                             cell.getValue() !== undefined
                               ? parseFloat(cell.getValue()).toFixed(2)
-                              : flexRender(
-                                  cell.column.columnDef.cell,
-                                  cell.getContext()
-                                );
+                              : cell.column.id === "date" &&
+                                  cell.getValue() !== undefined
+                                ? format(cell.getValue(), "yyyy-MM-dd")
+                                : flexRender(
+                                    cell.column.columnDef.cell,
+                                    cell.getContext()
+                                  );
 
                           return (
                             <TableCell

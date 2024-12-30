@@ -1,8 +1,4 @@
-import {
-  changePassSchema,
-  userSchema,
-  userUpdateSchema,
-} from "@/app/_components/formSchema";
+import { changePassSchema, userSchema } from "@/app/_components/formSchema";
 import { handleAxiosError } from "@/utils";
 import { UsersType } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -37,7 +33,7 @@ const useUsers = (role?: "admin" | "manager" | "delivery_man") => {
 
   // register form
   const registerForm = useForm<YourFormType>({
-    resolver: zodResolver(isEditing ? userUpdateSchema : userSchema),
+    resolver: zodResolver(userSchema),
     defaultValues: {
       name: "",
       email: "",

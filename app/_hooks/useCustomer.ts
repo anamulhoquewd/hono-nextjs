@@ -18,7 +18,6 @@ const useCustomers = () => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [userId, setUserId] = useState<string | null>(null);
   const [users, setUsers] = useState<CustomersType[]>([]);
-  // const [singleUser, setSingleUser] = useState<CustomersType | null>(null);
   const [defaultValues, setDefaultValues] = useState<YourFormType | null>(null);
 
   // register form
@@ -29,6 +28,8 @@ const useCustomers = () => {
       phone: "",
       secondaryPhone: "",
       address: "",
+      defaultPrice: 0,
+      defaultQuantity: 1,
       role: "customer",
     },
   });
@@ -67,40 +68,7 @@ const useCustomers = () => {
     }
   };
 
-  // get single user
-  // const getUserById = async (id: string) => {
-  //   if (!id) return;
-  //   setLoading(true);
-
-  //   try {
-  //     const response = await axios.get(
-  //  seUrl}/customers/${id},
-  //       {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
-
-  //     if (!response.data.success) {
-  //       throw new Error(response.data.message);
-  //     }
-
-  //
-
-  //     setSingleUser(response.data.data);
-  //   } catch (err) {
-  //     const handledError = handleAxiosError(err);
-
-  //
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
   // get all users
-
   const getUsers = async () => {
     setLoading(true);
     try {
@@ -114,6 +82,31 @@ const useCustomers = () => {
       }
 
       setUsers(response.data.data || []);
+    } catch (err) {
+      const handledError = handleAxiosError(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // get single user
+  const getUserById = async (id: string) => {
+    if (!id) return;
+    setLoading(true);
+
+    try {
+      const response = await axios.get(`${baseUrl}/customers/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
+
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
+
+      return response.data.data;
     } catch (err) {
       const handledError = handleAxiosError(err);
     } finally {
@@ -168,6 +161,7 @@ const useCustomers = () => {
       getUsers();
     } catch (err) {
       const handledError = handleAxiosError(err);
+      console.log("Error :", handledError);
     }
   };
 
@@ -194,6 +188,7 @@ const useCustomers = () => {
     updateUserHandler,
     deleteHandler,
     setUserId,
+    getUserById,
 
     loading,
     users,

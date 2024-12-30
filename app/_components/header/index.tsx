@@ -122,7 +122,7 @@ const HeaderComponent = () => {
 
   let navigation: { name: string; href: string }[] = [];
 
-  switch (role) {
+  switch ("admin") {
     case "admin":
       navigation = [
         { name: "Dashboard", href: "/dashboard" },
@@ -155,7 +155,7 @@ const HeaderComponent = () => {
         isMenuOpen={isMenuOpen}
         toggleMenu={toggleMenu}
       />
-      <header className="bg-white border-b">
+      <header className="bg-white border-b print:hidden">
         <nav
           className="mx-auto flex max-w-7xl items-center justify-between md:px-6 container py-4 px-2"
           aria-label="Global"

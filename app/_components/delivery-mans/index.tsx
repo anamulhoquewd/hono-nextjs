@@ -94,8 +94,8 @@ function DeliveryManTable() {
         title="Delivery Man"
         values={defaultValues}
         setValues={setDefaultValues}
-        nidDisabled={isEditing}
-        emailDisabled={isEditing}
+        isNidDisabled={isEditing}
+        isEmailDisabled={isEditing}
         isEditing={isEditing}
         setIsEditing={setIsEditing}
       />

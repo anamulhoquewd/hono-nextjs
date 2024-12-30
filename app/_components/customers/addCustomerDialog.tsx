@@ -6,7 +6,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { CustomerRegisterForms } from "@/app/_components/forms/registerForm";
+import { CustomerRegisterForms } from "@/app/_components/forms";
 
 function AddCustomersDialog({
   onSubmit,
@@ -40,12 +40,9 @@ function AddCustomersDialog({
             name: "",
             phone: "",
             secondaryPhone: "",
-            email: "",
-            NID: "",
-            avatar: "",
-            isActive: true,
             address: "",
-            description: "",
+            defaultPrice: 0,
+            defaultQuantity: 1,
           });
         }
         setIsOpen(open);

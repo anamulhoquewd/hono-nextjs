@@ -50,7 +50,15 @@ export const getSingleCustomer = async (c: Context) => {
  */
 export const createCustomer = async (c: Context) => {
   const body = await c.req.json();
-  const { phone } = body;
+  const {
+    name,
+    phone,
+    secondaryPhone,
+    address,
+    defaultPrice,
+    defaultQuantity,
+    role,
+  } = body;
   // Check for existing customer
   try {
     const customerExists = await Customer.findOne({
@@ -61,7 +69,13 @@ export const createCustomer = async (c: Context) => {
       throw new Error("Customer already exists");
     }
     const customer = await Customer.create({
-      ...body,
+      name,
+      phone,
+      secondaryPhone: secondaryPhone || "",
+      address,
+      defaultPrice,
+      defaultQuantity,
+      role,
     });
     if (!customer) {
       c.status(400);
@@ -76,6 +90,8 @@ export const createCustomer = async (c: Context) => {
         secondaryPhone: customer.secondaryPhone || "",
         role: customer.role,
         address: customer.address,
+        defaultPrice: customer.defaultPrice,
+        defaultQuantity: customer.defaultQuantity,
       },
       message: "Customer created successfully",
     });

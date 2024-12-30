@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import useUsers from "@/app/_hooks/useUsers";
-import { UserRegisterForms } from "@/app/_components/forms/registerForm";
+import { UserRegisterForms } from "@/app/_components/forms";
 
 const RegisterUsers = () => {
   const { registerHandler, registerForm } = useUsers();

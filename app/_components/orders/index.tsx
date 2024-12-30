@@ -24,7 +24,7 @@ import {
 } from "lucide-react";
 import { format } from "date-fns";
 import useOrders from "@/app/_hooks/useOrders";
-import OrdersRegisterForm from "@/app/_components/forms/orderForm";
+import { OrdersRegisterForm } from "@/app/_components/forms";
 import { Button } from "@/components/ui/button";
 import {
   Popover,
@@ -40,9 +40,9 @@ function OrderTable() {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
     _id: false,
     customer: false,
-    addedBy: false,
     secondaryPhone: false,
-    addedByRole: false,
+    price: true,
+    action: false,
   });
 
   const {
@@ -116,7 +116,7 @@ function OrderTable() {
         actionText={"Add Order"}
         isAddable={role !== "delivery_man" ? true : false}
       >
-        {(role === "admin" || role === "manager") && (
+        {(role !== "admin" || role === "manager") && (
           <div className="flex items-center justify-between w-full sm:w-auto sm:gap-4">
             <Button onClick={handlePreviousDay} variant="outline" size="icon">
               <ChevronLeft className="h-4 w-4" />
@@ -156,18 +156,14 @@ function OrderTable() {
                 <span className="text-sm font-medium text-muted-foreground">
                   Total Orders:
                 </span>
-                <span className="text-lg font-semibold">
-                  {totalOrders}
-                </span>
+                <span className="text-lg font-semibold">{totalOrders}</span>
               </div>
               <Separator orientation="vertical" className="m-auto" />
               <div className="flex justify-between">
                 <span className="text-sm font-medium text-muted-foreground">
                   Total Quantity:
                 </span>
-                <span className="text-lg font-semibold">
-                  {totalQuantity}
-                </span>
+                <span className="text-lg font-semibold">{totalQuantity}</span>
               </div>
               <Separator orientation="vertical" className="m-auto" />
               <div className="flex justify-between">

@@ -48,7 +48,6 @@ const useOrders = () => {
       searchTerm: "",
       customer: "",
       quantity: 0,
-      price: 0,
     },
   });
 
@@ -59,7 +58,7 @@ const useOrders = () => {
     try {
       const response = await axios.post(
         `${baseUrl}/orders/register`,
-        { ...values, date: format(new Date(selectedDate), "yyyy-MM-dd") },
+        { ...values, date: selectedDate },
         {
           headers: {
             "Content-Type": "application/json",
@@ -124,6 +123,7 @@ const useOrders = () => {
       setTotalOrdersCount(response.data.data.length || 0);
     } catch (err) {
       const handledError = handleAxiosError(err);
+      console.log("Error :", handledError);
     } finally {
       setLoading(false);
     }
@@ -146,6 +146,7 @@ const useOrders = () => {
       setOrdersOfCustomer(response.data.data || []);
     } catch (err) {
       const handledError = handleAxiosError(err);
+      console.log("Error :", handledError);
     } finally {
       setLoading(false);
     }
@@ -171,7 +172,6 @@ const useOrders = () => {
 
       registerForm.reset({
         quantity: 0,
-        price: 0,
         customer: "",
       });
 
@@ -200,6 +200,7 @@ const useOrders = () => {
       getOrders();
     } catch (err) {
       const handledError = handleAxiosError(err);
+      console.log("Error :", handledError);
     }
   };
 
@@ -254,25 +255,13 @@ const useOrders = () => {
 
   // Memoize totalPrice
   const totalPrice = useMemo(
-    () => filteredOrders.reduce((sum, order) => sum + (order.price || 0), 0),
+    () => filteredOrders.reduce((sum, order) => sum + (order.total || 0), 0),
     [filteredOrders]
   );
 
-  //  Memoize monthlyOrders
-  const monthlyOrders = useMemo(() => {
-    const monthStart = startOfMonth(new Date());
-
-    return orders.filter((order) => {
-      const orderDate = new Date(order.date);
-      return (
-        isAfter(orderDate, monthStart) || isSameDay(orderDate, monthStart) // 'isSameDay' ব্যবহার করে আরও নির্ভুলভাবে যাচাই করা
-      );
-    }).length;
-  }, [orders]);
-
   // Memoize weeklyOrders
   const weeklyOrders = useMemo(() => {
-    const weekStart = startOfWeek(new Date(), { weekStartsOn: 6 }); // শনিবার শুরু করলে weekStartsOn: 6
+    const weekStart = startOfWeek(new Date(), { weekStartsOn: 6 });
 
     return orders.filter((order) => {
       const orderDate = new Date(order.date);
@@ -320,10 +309,24 @@ const useOrders = () => {
     }).length;
   }, [orders]);
 
+  // Memoize monthlyOrders
+  const monthlyOrders = useMemo(() => {
+    const monthStart = startOfMonth(new Date());
+    const monthEnd = endOfMonth(new Date()); // বর্তমান মাসের শেষ দিন
+
+    return orders.filter((order) => {
+      const orderDate = new Date(order.date);
+      return (
+        (isAfter(orderDate, monthStart) || isSameDay(orderDate, monthStart)) &&
+        (isBefore(orderDate, monthEnd) || isSameDay(orderDate, monthEnd))
+      );
+    }).length;
+  }, [orders]);
+
   // Memoize previousMonthOrders
   const previousMonthOrders = useMemo(() => {
-    const lastMonthStart = startOfMonth(subMonths(new Date(), 1));
-    const lastMonthEnd = endOfMonth(subMonths(new Date(), 1));
+    const lastMonthStart = startOfMonth(subMonths(new Date(), 1)); // গত মাসের শুরু
+    const lastMonthEnd = endOfMonth(subMonths(new Date(), 1)); // গত মাসের শেষ
 
     return orders.filter((order) => {
       const orderDate = new Date(order.date);
